@@ -30,3 +30,4 @@ Open `sitemap-diagram.html` in your browser or visit the deployed version.
 - LocalStorage for comments persistence
 - Mobile-responsive layout
 
+
