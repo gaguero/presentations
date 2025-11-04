@@ -271,22 +271,81 @@
               content: `<strong>Hero Section:</strong> H1: "Luxury Eco-Resort Between the Jungle & the Sea — Bocas del Toro, Panama"<br>
               Subheading: "A personalized, sustainable escape designed for your values."<br>
               CTA buttons: Book Now | Plan Your Escape<br><br>
-              <strong>Key Sections:</strong><br>
-              • About Preview — Short paragraph + "Our Story →"<br>
-              • Accommodations Preview — Cards for room types + "Discover Our Rooms →"<br>
-              • Experiences Carousel — Dolphin Encounters, Rainforest Hike, Chocolate Farm, etc.<br>
-              • Sustainability Highlight — Stats block: "100% Solar | 95% Local Produce | Indigenous Partnerships"<br>
-              • Guest Testimonials — Review slider with source badges<br>
-              • From Our Blog — 3 most recent blog articles<br>
-              • CTA Footer Strip — "Book Your Stay in Paradise →"<br><br>
+              
+              <strong>Homepage Content Flow (Storytelling & Conversion Architecture):</strong><br><br>
+              
+              <strong>1. About Preview</strong> — Trust & Connection<br>
+              Short paragraph introducing the founders' vision and what makes Dolphin Blue Paradise unique<br>
+              CTA: "Our Story →"<br>
+              <em>Why here:</em> Establishes credibility and emotional connection immediately after hero<br><br>
+              
+              <strong>2. Accommodations Preview</strong> — The Main Decision<br>
+              Visual card grid showcasing 4 room types with key features and starting rates<br>
+              CTA: "Discover Our Rooms →"<br>
+              <em>Why here:</em> Primary conversion driver - show where guests will stay early<br><br>
+              
+              <strong>3. Experiences Carousel</strong> — What Awaits You<br>
+              Interactive slider featuring key activities: Dolphin Encounters, Rainforest Hike, Chocolate Farm, Snorkeling, etc.<br>
+              CTA: "Explore All Experiences →"<br>
+              <em>Why here:</em> Builds excitement about what guests will DO at the resort, increasing perceived value<br><br>
+              
+              <strong>4. Blå Bar & Restaurant Feature</strong> — The Culinary Journey<br>
+              Full-width hero image: Over-the-water dining at sunset with fresh catch display<br>
+              Section Title: "Farm-to-Table Dining Over the Caribbean"<br>
+              2-3 sentence intro: Chef-crafted menus, 95% locally sourced ingredients, organic island farms<br>
+              Visual storytelling grid (4 photos):<br>
+              &nbsp;&nbsp;• Fresh seafood display from local fishermen<br>
+              &nbsp;&nbsp;• Chef preparing dishes in open kitchen<br>
+              &nbsp;&nbsp;• Signature cocktails at sunset bar<br>
+              &nbsp;&nbsp;• Candlelit dinner on the dock<br>
+              Featured Quote: "We don't just serve food — we tell the story of Bocas del Toro on every plate." — [Chef Name]<br>
+              Key Highlights Box:<br>
+              &nbsp;&nbsp;✓ Breakfast, Lunch & Dinner Daily<br>
+              &nbsp;&nbsp;✓ Locally Caught Seafood<br>
+              &nbsp;&nbsp;✓ Organic Farm Partners<br>
+              &nbsp;&nbsp;✓ Craft Cocktails & Natural Wines<br>
+              &nbsp;&nbsp;✓ Vegetarian & Dietary Options<br>
+              &nbsp;&nbsp;✓ Open to Non-Guests (48hr advance notice)<br>
+              CTA: "View Menus & Reserve Your Table →"<br>
+              <em>Why here:</em> After establishing what guests will do, show them how they'll be nourished. Dining completes the "experience" narrative before moving to values/proof.<br><br>
+              
+              <strong>5. Sustainability Highlight</strong> — Our Commitment<br>
+              Stats block: "100% Solar Powered | 95% Local Produce | Indigenous Partnerships Since 2018"<br>
+              Brief paragraph on environmental & community impact<br>
+              CTA: "Our Impact →"<br>
+              <em>Why here:</em> After painting the complete experience, reinforce VALUES that matter to conscious travelers<br><br>
+              
+              <strong>6. Guest Testimonials</strong> — Social Proof<br>
+              Review slider featuring 5-star reviews with guest names, photos, and source badges (Google, Booking.com, TripAdvisor)<br>
+              Include mix of testimonials: accommodations, dining, experiences, sustainability<br>
+              <em>Why here:</em> Validates everything above with real guest experiences - critical final trust signal before blog/CTA<br><br>
+              
+              <strong>7. From Our Blog</strong> — Deeper Stories<br>
+              3 most recent blog articles with featured images and excerpts<br>
+              CTA: "Read More Stories →"<br>
+              <em>Why here:</em> For guests still in research mode, provides content to explore without leaving site<br><br>
+              
+              <strong>8. CTA Footer Strip</strong> — Final Conversion Push<br>
+              Full-width banner: "Ready to Experience Paradise? Book Your Stay Today"<br>
+              Dual CTAs: "Book Now" + "Contact Us"<br>
+              <em>Why here:</em> Final opportunity to convert after full story has been told<br><br>
               <strong>Gallery Distribution Strategy:</strong><br>
               Rather than forcing guests to visit a separate "Gallery" page, we embed rich photo galleries exactly where they're most relevant. This contextual approach keeps guests engaged in their journey (from inspiration → decision → booking) without navigation detours.<br><br>
               <strong>Where Photos Live:</strong><br>
               • Room galleries → Accommodations page (each room type has 8-12 photos + 360° tour)<br>
               • Nature & wildlife → Experiences page + Sustainability page<br>
-              • Dining ambiance & food → Dining page<br>
+              • Dining ambiance & food → Featured on Homepage + Full gallery on Dining page<br>
               • Community & team → Sustainability + About pages<br>
               • Hero imagery → Homepage carousel (rotating feature)<br><br>
+              
+              <strong>Why Feature Dining So Prominently?</strong><br>
+              The culinary experience is a major decision factor for luxury travelers and a key brand differentiator for Dolphin Blue Paradise. By dedicating significant homepage real estate to the dining experience:<br>
+              • Signals that food quality matches accommodation luxury<br>
+              • Appeals to culinary tourists (growing market segment)<br>
+              • Showcases the farm-to-table sustainability story visually<br>
+              • Creates emotional connection through food storytelling<br>
+              • Generates revenue from non-guest diners (locals + day-trippers)<br>
+              • Provides Instagram-worthy content that guests will share<br><br>
               <strong>User Experience Benefits:</strong><br>
               • Guests see photos when they're actively interested (e.g., browsing rooms)<br>
               • Reduces "exploration fatigue" from too many navigation options<br>
@@ -296,7 +355,7 @@
             },
             
             // LEVEL 1 - Main Pages (7 total)
-            { id: 'about', label: 'ABOUT / OUR STORY', x: 30, y: 180, width: 150, height: 55, type: 'section', parent: 'home',
+            { id: 'about', label: 'OUR STORY', x: 70, y: 180, width: 130, height: 55, type: 'section', parent: 'home',
               description: 'Build credibility and personality (E-E-A-T focus)',
               why: `<strong>E-E-A-T Strategy:</strong> Google's ranking algorithm prioritizes Experience, Expertise, Authoritativeness, and Trustworthiness. This page directly addresses all four.<br><br>
               <strong>Why This Matters:</strong><br>
@@ -314,7 +373,7 @@
               • Our Partners — NGOs, local farms, indigenous cooperatives`
             },
             
-            { id: 'accommodations', label: 'ACCOMMODATIONS', x: 210, y: 180, width: 140, height: 55, type: 'section', parent: 'home',
+            { id: 'accommodations', label: 'ACCOMMODATIONS', x: 235, y: 180, width: 155, height: 55, type: 'section', parent: 'home',
               description: 'Cabanas & Rooms with Sea View',
               why: `<strong>Single-Page Strategy:</strong> All 4 room types on ONE page for frictionless comparison and faster booking decisions.<br><br>
               <strong>Why Not Separate Pages Per Room?</strong><br>
@@ -360,7 +419,7 @@
               <strong>UX Benefit:</strong> Guests compare room types and packages in one flow, increasing conversion by presenting upgraded experiences at the point of interest.`
             },
             
-            { id: 'dining', label: 'DINING\nBLÅ BAR & RESTAURANT', x: 380, y: 180, width: 160, height: 55, type: 'section', parent: 'home',
+            { id: 'dining', label: 'DINING', x: 425, y: 180, width: 120, height: 55, type: 'section', parent: 'home',
               description: 'Farm-to-Table Dining Over the Water',
               why: `<strong>Strategic Positioning:</strong> Dining as a DESTINATION, not just an amenity. This elevates perceived value and attracts food-focused travelers.<br><br>
               <strong>Why Standalone Page?</strong><br>
@@ -382,7 +441,7 @@
               • CTA: "Reserve a Table via WhatsApp or Email"`
             },
             
-            { id: 'experiences', label: 'EXPERIENCES', x: 620, y: 180, width: 140, height: 55, type: 'section', parent: 'home',
+            { id: 'experiences', label: 'EXPERIENCES', x: 630, y: 180, width: 140, height: 55, type: 'section', parent: 'home',
               description: 'Discover Our Curated Eco-Adventures',
               why: `<strong>Long-Tail SEO Powerhouse:</strong> This page structure captures every possible experience-related search query.<br><br>
               <strong>Why List EVERY Activity?</strong><br>
@@ -417,7 +476,7 @@
               <strong>Each page includes:</strong> Hero image, Summary, Logistics (duration/inclusions/difficulty), Wildlife/species, What to bring, CTA: "Add to Your Itinerary"`
             },
             
-            { id: 'sustainability', label: 'OUR IMPACT\nSUSTAINABILITY', x: 800, y: 180, width: 145, height: 55, type: 'section', parent: 'home',
+            { id: 'sustainability', label: 'SUSTAINABILITY', x: 815, y: 180, width: 145, height: 55, type: 'section', parent: 'home',
               description: 'Standalone sustainability hub (strong eco-tourism differentiator)',
               why: `<strong>Standalone = Strategic Choice:</strong> Sustainability isn't buried in "About"—it's a PRIMARY value proposition deserving its own page.<br><br>
               <strong>Target Audience Alignment:</strong><br>
@@ -444,7 +503,7 @@
               • CTA: "Download Full Sustainability Report (PDF)"`
             },
             
-            { id: 'blog', label: 'BLOG', x: 985, y: 180, width: 125, height: 55, type: 'section', parent: 'home',
+            { id: 'blog', label: 'BLOG', x: 1005, y: 180, width: 110, height: 55, type: 'section', parent: 'home',
               description: 'Build authority, SEO reach, and storytelling depth',
               why: `<strong>Long-Term SEO Investment:</strong> Blog content compounds over time, capturing search traffic that transactional pages can't.<br><br>
               <strong>Content Strategy Targets:</strong><br>
@@ -475,7 +534,7 @@
               • Related Posts`
             },
             
-            { id: 'contact', label: 'CONTACT\nRESERVATIONS', x: 1150, y: 180, width: 135, height: 55, type: 'section', parent: 'home',
+            { id: 'contact', label: 'CONTACT\nRESERVATIONS', x: 1160, y: 180, width: 145, height: 55, type: 'section', parent: 'home',
               description: 'Complete booking and planning hub',
               why: `<strong>The Conversion Bottleneck:</strong> This is where interest becomes revenue. Every barrier removed here = higher booking rate.<br><br>
               <strong>Why Consolidate FAQs + Getting Here + Contact?</strong><br>
@@ -617,29 +676,51 @@
                 html += `<p style="margin-bottom: 25px; color: #6B7280; font-size: 1.05em;">${node.description}</p>`;
             }
 
-            // Show page structure/content first (with integrated content merged in)
-            if (node.content || node.integratedContent) {
-                html += `<div style="margin-bottom: 25px; padding: 25px; background: #E8F5E9; border-left: 4px solid #10B981; border-radius: 8px;">`;
-                html += `<h3 style="color: #1D3557; margin-bottom: 15px; font-weight: 600; font-size: 1.1em;">Page Layout & Structure</h3>`;
+            // Show combined page structure with reasoning integrated
+            if (node.content || node.integratedContent || node.why) {
+                html += `<div style="margin-bottom: 25px; padding: 25px; background: #FFFFFF; border: 2px solid #E5E7EB; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">`;
+                html += `<h3 style="color: #1D3557; margin-bottom: 15px; font-weight: 600; font-size: 1.1em;">Page Structure & Strategy</h3>`;
                 
-                if (node.content) {
-                    html += `<div style="color: #4B5563; line-height: 1.7; font-size: 0.95em; margin-bottom: ${node.integratedContent ? '20px' : '0'};">${node.content}</div>`;
+                // Structure/Layout box
+                if (node.content || node.integratedContent) {
+                    html += `<div style="margin-bottom: 20px; padding: 18px; background: #E8F5E9; border-radius: 8px; border-left: 4px solid #10B981;">`;
+                    html += `<h4 style="color: #1D3557; margin-bottom: 10px; font-weight: 600; font-size: 0.95em;">📄 Page Layout</h4>`;
+                    
+                    if (node.content) {
+                        html += `<div style="color: #4B5563; line-height: 1.7; font-size: 0.95em; margin-bottom: ${node.integratedContent ? '15px' : '0'};">${node.content}</div>`;
+                    }
+                    
+                    if (node.integratedContent) {
+                        html += `<div style="color: #4B5563; line-height: 1.7; font-size: 0.95em;">${node.integratedContent}</div>`;
+                    }
+                    
+                    html += `</div>`;
                 }
                 
-                if (node.integratedContent) {
-                    html += `<div style="color: #4B5563; line-height: 1.7; font-size: 0.95em;">${node.integratedContent}</div>`;
+                // Why box
+                if (node.why) {
+                    html += `<div style="padding: 18px; background: rgba(168, 218, 220, 0.15); border-radius: 8px; border-left: 4px solid #A8DADC;">`;
+                    html += `<h4 style="color: #1D3557; margin-bottom: 10px; font-weight: 600; font-size: 0.95em;">💡 Why This Works</h4>`;
+                    html += `<div style="color: #4B5563; line-height: 1.7; font-size: 0.92em;">${node.why}</div>`;
+                    html += `</div>`;
                 }
                 
                 html += `</div>`;
             }
 
-            // Show WHY this structure makes sense (Strategic basis)
-            if (node.why) {
-                html += `<div style="margin-bottom: 25px; padding: 20px; background: #F0F4F8; border-left: 4px solid #2a5298; border-radius: 4px;">`;
-                html += `<h3 style="color: #1e3c72; margin-bottom: 10px; font-weight: 600; font-size: 1.1em;">Why This Structure?</h3>`;
-                html += `<p style="color: #333; line-height: 1.7; font-size: 0.95em;">${node.why}</p>`;
-                html += `</div>`;
-            }
+            // Add comments section for this specific page (moved up - right after Why section)
+            html += `<div style="margin-bottom: 30px; padding: 25px; background: #F5F7FA; border-radius: 10px; border: 1px solid #E5E7EB;">`;
+            html += `<h3 style="color: #1D3557; font-weight: 600; margin-bottom: 10px; font-size: 1.1em;">Thoughts & Notes</h3>`;
+            html += `<p style="color: #6B7280; font-size: 0.9em; margin-bottom: 20px;">Quick thoughts on this page structure</p>`;
+            
+            html += `<div id="modal-comments-list-${node.id}" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">`;
+            html += `</div>`;
+            
+            html += `<form id="modal-comment-form-${node.id}" style="display: flex; gap: 12px;">`;
+            html += `<textarea id="modal-comment-text-${node.id}" placeholder="Add a thought or note..." required rows="2" style="flex: 1; padding: 10px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 0.9em; font-family: inherit; resize: vertical; background: white;"></textarea>`;
+            html += `<button type="submit" style="padding: 10px 20px; background: #3B82F6; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-size: 0.9em; height: fit-content;">Add</button>`;
+            html += `</form>`;
+            html += `</div>`;
 
             // Find children
             const children = structure.filter(n => n.parent === node.id);
@@ -686,20 +767,6 @@
             });
             
             html += `</div>`;
-            html += `</div>`;
-
-            // Add comments section for this specific page
-            html += `<div style="margin-top: 30px; padding: 25px; background: #F5F7FA; border-radius: 10px; border: 1px solid #E5E7EB;">`;
-            html += `<h3 style="color: #1D3557; font-weight: 600; margin-bottom: 10px; font-size: 1.1em;">Thoughts & Notes</h3>`;
-            html += `<p style="color: #6B7280; font-size: 0.9em; margin-bottom: 20px;">Quick thoughts on this page structure</p>`;
-            
-            html += `<div id="modal-comments-list-${node.id}" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">`;
-            html += `</div>`;
-            
-            html += `<form id="modal-comment-form-${node.id}" style="display: flex; gap: 12px;">`;
-            html += `<textarea id="modal-comment-text-${node.id}" placeholder="Add a thought or note..." required rows="2" style="flex: 1; padding: 10px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 0.9em; font-family: inherit; resize: vertical; background: white;"></textarea>`;
-            html += `<button type="submit" style="padding: 10px 20px; background: #3B82F6; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-size: 0.9em; height: fit-content;">Add</button>`;
-            html += `</form>`;
             html += `</div>`;
 
             modalBody.innerHTML = html;
