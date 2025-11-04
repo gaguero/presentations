@@ -1,0 +1,12 @@
+{
+  "navigationFallback": {
+    "rewrite": "/sitemap-diagram.html"
+  },
+  "routes": [
+    {
+      "route": "/",
+      "serve": "/sitemap-diagram.html"
+    }
+  ]
+}
+
