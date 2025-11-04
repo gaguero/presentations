@@ -797,31 +797,43 @@
             }
         });
         
-        // Per-page comments functionality
-        function getPageCommentsKey(pageId) {
-            return `dolphin-blue-comments-${pageId}`;
-        }
+        // Per-page comments functionality - Server-based
         
-        // Load comments for a specific page
-        function loadPageComments(pageId) {
-            const commentsKey = getPageCommentsKey(pageId);
-            const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+        // Load comments for a specific page from server
+        async function loadPageComments(pageId) {
             const commentsList = document.getElementById(`modal-comments-list-${pageId}`);
             
             if (!commentsList) return;
             
-            if (comments.length === 0) {
-                commentsList.innerHTML = '<p style="color: #9CA3AF; font-style: italic; padding: 15px; text-align: center; font-size: 0.85em;">No notes yet</p>';
-                return;
+            try {
+                const response = await fetch(`/api/comments/${pageId}`);
+                const comments = await response.json();
+                
+                if (comments.length === 0) {
+                    commentsList.innerHTML = '<p style="color: #9CA3AF; font-style: italic; padding: 15px; text-align: center; font-size: 0.85em;">No notes yet</p>';
+                    return;
+                }
+                
+                commentsList.innerHTML = comments.map(comment => {
+                    const date = new Date(comment.timestamp).toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    });
+                    
+                    return `
+                        <div style="background: white; padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #E5E7EB; position: relative;">
+                            <button onclick="deletePageComment('${pageId}', '${comment.id}')" style="position: absolute; top: 8px; right: 8px; color: #9CA3AF; background: none; border: none; cursor: pointer; font-size: 1.1em; padding: 2px 6px; line-height: 1;" title="Delete">×</button>
+                            <p style="color: #4B5563; line-height: 1.6; font-size: 0.9em; margin: 0; padding-right: 25px;">${escapeHtml(comment.text)}</p>
+                            <small style="color: #9CA3AF; font-size: 0.75em; margin-top: 8px; display: block;">${date}</small>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading comments:', error);
+                commentsList.innerHTML = '<p style="color: #EF4444; font-style: italic; padding: 15px; text-align: center; font-size: 0.85em;">Failed to load comments</p>';
             }
-            
-            commentsList.innerHTML = comments.map((comment, index) => `
-                <div style="background: white; padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #E5E7EB; position: relative;">
-                    <button onclick="deletePageComment('${pageId}', ${index})" style="position: absolute; top: 8px; right: 8px; color: #9CA3AF; background: none; border: none; cursor: pointer; font-size: 1.1em; padding: 2px 6px; line-height: 1;" title="Delete">×</button>
-                    <p style="color: #4B5563; line-height: 1.6; font-size: 0.9em; margin: 0; padding-right: 25px;">${escapeHtml(comment.text)}</p>
-                    <small style="color: #9CA3AF; font-size: 0.75em; margin-top: 8px; display: block;">${comment.date}</small>
-                </div>
-            `).join('');
         }
         
         // Setup form handler for a specific page
@@ -829,40 +841,57 @@
             const form = document.getElementById(`modal-comment-form-${pageId}`);
             if (!form) return;
             
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                const text = document.getElementById(`modal-comment-text-${pageId}`).value.trim();
+                const textInput = document.getElementById(`modal-comment-text-${pageId}`);
+                const text = textInput.value.trim();
                 
                 if (!text) return;
                 
-                const commentsKey = getPageCommentsKey(pageId);
-                const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
-                const newComment = {
-                    text,
-                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
-                };
-                
-                comments.unshift(newComment);
-                localStorage.setItem(commentsKey, JSON.stringify(comments));
-                
-                // Clear form
-                document.getElementById(`modal-comment-text-${pageId}`).value = '';
-                
-                // Reload comments
-                loadPageComments(pageId);
+                try {
+                    const response = await fetch(`/api/comments/${pageId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ text })
+                    });
+                    
+                    if (response.ok) {
+                        // Clear form
+                        textInput.value = '';
+                        
+                        // Reload comments
+                        await loadPageComments(pageId);
+                    } else {
+                        alert('Failed to save comment. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error saving comment:', error);
+                    alert('Failed to save comment. Please check your connection.');
+                }
             });
         }
         
         // Delete page-specific comment
-        window.deletePageComment = function(pageId, index) {
+        window.deletePageComment = async function(pageId, commentId) {
             if (!confirm('Delete this comment?')) return;
             
-            const commentsKey = getPageCommentsKey(pageId);
-            const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
-            comments.splice(index, 1);
-            localStorage.setItem(commentsKey, JSON.stringify(comments));
-            loadPageComments(pageId);
+            try {
+                const response = await fetch(`/api/comments/${pageId}/${commentId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    await loadPageComments(pageId);
+                } else {
+                    alert('Failed to delete comment. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error deleting comment:', error);
+                alert('Failed to delete comment. Please check your connection.');
+            }
         };
         
         // Escape HTML to prevent XSS
