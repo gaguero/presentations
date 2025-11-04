@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolphin Blue Paradise - Sitemap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            overflow: auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sitemap-container {
+            max-width: 95vw;
+            margin: 0 auto;
+            position: relative;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+        }
+
+        .controls button {
+            padding: 10px 24px;
+            margin: 0 8px;
+            border: 2px solid #2a5298;
+            background: white;
+            color: #2a5298;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .controls button:hover {
+            background: #2a5298;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(42, 82, 152, 0.3);
+        }
+
+        svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .node {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .node rect {
+            stroke-width: 2.5;
+            rx: 10;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.12));
+        }
+
+        .node:hover rect {
+            stroke-width: 3.5;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+            transform: translateY(-2px);
+        }
+
+        /* Unified color scheme */
+        .node rect {
+            fill: #E8F4F8;
+            stroke: #5A9FBD;
+        }
+
+        .node.home rect {
+            fill: #D5E9F2;
+            stroke: #3D7A94;
+        }
+        
+        .node.subsection rect {
+            fill: #FFF8E6;
+            stroke: #E6B84D;
+        }
+        
+        .node.content rect {
+            fill: #F0F0F0;
+            stroke: #999999;
+        }
+
+        .node text {
+            fill: #2c3e50;
+            font-size: 12px;
+            font-weight: 600;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .node.home text {
+            font-size: 16px;
+            font-weight: 700;
+            fill: #1e3c72;
+        }
+
+        .link {
+            fill: none;
+            stroke: #9ca3af;
+            stroke-width: 2.5;
+            opacity: 0.7;
+        }
+
+        .tooltip {
+            position: fixed;
+            background: #1e3c72;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            max-width: 400px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+            line-height: 1.5;
+            display: none;
+        }
+        
+        .tooltip strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #A8DADC;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+            display: block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #1e3c72;
+        }
+
+        .modal-content h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            padding-right: 40px;
+        }
+
+        .modal-content ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .modal-content li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .modal-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sitemap-container">
+        <h1 style="text-align: center; color: #1D3557; margin-bottom: 10px; font-size: 2em; font-weight: 700;">Dolphin Blue Paradise - Site Structure</h1>
+        <p style="text-align: center; color: #6B7280; margin-bottom: 30px; font-size: 0.95em; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            Streamlined 7-page architecture designed for clarity, efficiency, and conversion. Click any page to explore content strategy and UX rationale.
+        </p>
+        <svg id="sitemap" width="100%" height="400" viewBox="0 0 1650 280" preserveAspectRatio="xMidYMid meet"></svg>
+        
+        <div class="controls">
+            <button onclick="window.print()">Print</button>
+            <button onclick="window.location.reload()">Reset View</button>
+        </div>
+        
+        <!-- Overall Sitemap Feedback Note -->
+        <div style="margin-top: 50px; padding: 30px; background: #F5F7FA; border-radius: 12px; border: 1px solid #E5E7EB; text-align: center;">
+            <h2 style="color: #1D3557; font-size: 1.5em; font-weight: 700; margin-bottom: 10px;">Leave Feedback on Specific Pages</h2>
+            <p style="color: #6B7280; font-size: 1em; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+                Click on any page in the diagram above to open its details and leave targeted comments. Each page has its own comment section so you can provide specific feedback where it matters most.
+            </p>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        const svg = document.getElementById('sitemap');
+        
+        // Node structure - Consolidated to 7 main pages (Option B)
+        const structure = [
+            // HOME
+            { id: 'home', label: 'Home', x: 750, y: 40, width: 140, height: 60, type: 'home', 
+              description: 'Luxury Eco-Resort Between the Jungle & the Sea',
+              why: `<strong>Primary Goal:</strong> Immediate clarity and instant emotional connection within 3 seconds of landing.<br><br>
+              <strong>User Psychology:</strong> Visitors make stay/leave decisions within seconds. The hero section must instantly communicate WHAT (luxury eco-resort), WHERE (Bocas del Toro, Panama), and WHY (sustainable escape for conscious travelers).<br><br>
+              <strong>Conversion Strategy:</strong><br>
+              • Dual CTAs ("Book Now" + "Plan Your Escape") cater to both ready-to-book and research-phase visitors<br>
+              • Preview sections act as internal navigation, reducing bounce by offering clear next steps<br>
+              • Social proof (testimonials) + authority signals (blog snippets) build trust immediately<br>
+              • Sustainability stats target the core audience: value-driven, eco-conscious travelers<br><br>
+              <strong>SEO Value:</strong> Homepage captures branded searches while preview sections internal-link to high-value pages, distributing page authority throughout the site.`,
+              content: `<strong>Hero Section:</strong> H1: "Luxury Eco-Resort Between the Jungle & the Sea — Bocas del Toro, Panama"<br>
+              Subheading: "A personalized, sustainable escape designed for your values."<br>
+              CTA buttons: Book Now | Plan Your Escape<br><br>
+              <strong>Key Sections:</strong><br>
+              • About Preview — Short paragraph + "Our Story →"<br>
+              • Accommodations Preview — Cards for room types + "Discover Our Rooms →"<br>
+              • Experiences Carousel — Dolphin Encounters, Rainforest Hike, Chocolate Farm, etc.<br>
+              • Sustainability Highlight — Stats block: "100% Solar | 95% Local Produce | Indigenous Partnerships"<br>
+              • Guest Testimonials — Review slider with source badges<br>
+              • From Our Blog — 3 most recent blog articles<br>
+              • CTA Footer Strip — "Book Your Stay in Paradise →"<br><br>
+              <strong>Gallery Distribution Strategy:</strong><br>
+              Rather than forcing guests to visit a separate "Gallery" page, we embed rich photo galleries exactly where they're most relevant. This contextual approach keeps guests engaged in their journey (from inspiration → decision → booking) without navigation detours.<br><br>
+              <strong>Where Photos Live:</strong><br>
+              • Room galleries → Accommodations page (each room type has 8-12 photos + 360° tour)<br>
+              • Nature & wildlife → Experiences page + Sustainability page<br>
+              • Dining ambiance & food → Dining page<br>
+              • Community & team → Sustainability + About pages<br>
+              • Hero imagery → Homepage carousel (rotating feature)<br><br>
+              <strong>User Experience Benefits:</strong><br>
+              • Guests see photos when they're actively interested (e.g., browsing rooms)<br>
+              • Reduces "exploration fatigue" from too many navigation options<br>
+              • Increases time-on-page for high-value sections<br>
+              • Photos serve as visual proof points exactly where conversion happens<br><br>
+              <strong>Performance:</strong> Lazy-loaded images with WebP format for fast mobile experience.`
+            },
+            
+            // LEVEL 1 - Main Pages (7 total)
+            { id: 'about', label: 'About / Our Story', x: 50, y: 180, width: 150, height: 55, type: 'section', parent: 'home',
+              description: 'Build credibility and personality (E-E-A-T focus)',
+              why: `<strong>E-E-A-T Strategy:</strong> Google's ranking algorithm prioritizes Experience, Expertise, Authoritativeness, and Trustworthiness. This page directly addresses all four.<br><br>
+              <strong>Why This Matters:</strong><br>
+              • <strong>Experience:</strong> Founders' personal journey and vision adds authenticity<br>
+              • <strong>Expertise:</strong> Named team members with specific titles (Head Chef, Sustainability Lead) demonstrate specialized knowledge<br>
+              • <strong>Authority:</strong> Press recognition (Condé Nast, Virtuoso) and partnerships validate credibility<br>
+              • <strong>Trust:</strong> Transparent partnerships with NGOs and local communities show genuine commitment<br><br>
+              <strong>Conversion Impact:</strong> Boutique hotel bookings are emotional decisions. Knowing WHO runs the resort and WHY they care transforms a transaction into supporting a mission. This resonates deeply with conscious travelers willing to pay premium rates.<br><br>
+              <strong>Differentiation:</strong> Most resort "About" pages are generic. Named experts with quotes humanize the brand and create memorable personality.`,
+              content: `<strong>Sections:</strong><br>
+              • Our Story — Founders' vision + sustainable mission<br>
+              • Our Team — Mini bios (Managing Director, Head Chef, Activities Manager, Sustainability Lead) with quotes<br>
+              • Press & Recognition — Logos (Virtuoso, Condé Nast, Booking.com Traveller Review Award)<br>
+              • Our Promise to You — 3 pillars: Personalization, Sustainability, Comfort<br>
+              • Our Partners — NGOs, local farms, indigenous cooperatives`
+            },
+            
+            { id: 'accommodations', label: 'Accommodations', x: 240, y: 180, width: 140, height: 55, type: 'section', parent: 'home',
+              description: 'Cabanas & Rooms with Sea View',
+              why: `<strong>Single-Page Strategy:</strong> All 4 room types on ONE page for frictionless comparison and faster booking decisions.<br><br>
+              <strong>Why Not Separate Pages Per Room?</strong><br>
+              • Reduces decision paralysis—guests can compare side-by-side instantly<br>
+              • Decreases page depth (fewer clicks to book = higher conversion)<br>
+              • Mobile-friendly: scrolling beats clicking on mobile devices<br>
+              • Integrated packages appear contextually when guests are already thinking about rooms<br><br>
+              <strong>Long-Tail SEO Gold Mine:</strong><br>
+              Each room description targets hyper-specific searches like:<br>
+              • "Beachfront cabana with plunge pool Bocas del Toro"<br>
+              • "Family-friendly jungle room Panama"<br>
+              • "Sea view accommodations Isla San Cristóbal"<br><br>
+              <strong>Conversion Optimization:</strong><br>
+              • Immediate CTAs ("Book Now") at hero + each room + page bottom<br>
+              • 360° tours reduce uncertainty (a major booking barrier for remote destinations)<br>
+              • Transparent pricing builds trust<br>
+              • Package integration upsells naturally without feeling pushy`,
+              content: `<strong>H1:</strong> "Cabanas & Rooms with Sea View"<br><br>
+              <strong>Layout:</strong><br>
+              • Hero Section – full-width image (cabana + bay) + CTA "Book Now"<br>
+              • Intro Paragraph – comfort, views, and sustainability<br>
+              • Room Comparison Grid (4 types):<br>
+              &nbsp;&nbsp;- Premium Deluxe Sea View Cabana<br>
+              &nbsp;&nbsp;- Sea View Cabana<br>
+              &nbsp;&nbsp;- Dolphin View Room<br>
+              &nbsp;&nbsp;- Family Jungle Room<br>
+              • Each: gallery thumbnail + highlight list + "Book Your Room" CTA<br>
+              • Photo gallery + 360° tours<br>
+              • Availability & rates<br>
+              • CTA Banner – "Find your place between the jungle and the sea"<br><br>
+              <strong>Special Offers & Packages:</strong><br>
+              Packages appear directly within the Accommodations page, allowing guests to discover room upgrades and bundled experiences at the moment they're choosing where to stay. This reduces decision fatigue and creates a seamless path from browsing to booking.<br><br>
+              <strong>Package Options:</strong><br>
+              • Romantic Escape<br>
+              • Adventure Package<br>
+              • Private Island Buyout<br><br>
+              <strong>Each package includes:</strong><br>
+              • Description with visual storytelling<br>
+              • Day-by-day itinerary highlights<br>
+              • What's included & excluded (transparent pricing)<br>
+              • Best seasons to book<br>
+              • CTA: "Request Custom Quote"<br><br>
+              <strong>UX Benefit:</strong> Guests compare room types and packages in one flow, increasing conversion by presenting upgraded experiences at the point of interest.`
+            },
+            
+            { id: 'dining', label: 'Dining\nBlå Bar & Restaurant', x: 420, y: 180, width: 160, height: 55, type: 'section', parent: 'home',
+              description: 'Farm-to-Table Dining Over the Water',
+              why: `<strong>Strategic Positioning:</strong> Dining as a DESTINATION, not just an amenity. This elevates perceived value and attracts food-focused travelers.<br><br>
+              <strong>Why Standalone Page?</strong><br>
+              • Culinary tourism is a major booking driver for high-end travelers<br>
+              • "Farm-to-table" and "over-the-water dining" are high-value SEO keywords<br>
+              • Detailed chef philosophy and sourcing transparency appeals to conscious foodies<br>
+              • Allows for rich content: menu PDFs, ingredient stories, supplier partnerships<br><br>
+              <strong>Revenue Opportunity:</strong><br>
+              "48-hour advance notice for non-guests" policy creates exclusivity while opening revenue stream from locals + day-trippers.<br><br>
+              <strong>Content Marketing Potential:</strong><br>
+              Blog posts can link here for recipe features, seasonal menu updates, and supplier spotlights—driving organic traffic from food blogs and travel sites.<br><br>
+              <strong>Differentiation:</strong> Most resorts bury dining info. Making it prominent signals that food quality is exceptional, not an afterthought.`,
+              content: `<strong>Hero:</strong> "Farm-to-Table Dining Over the Water"<br><br>
+              <strong>Sections:</strong><br>
+              • Overview — Chef philosophy + locally sourced organic ingredients<br>
+              • Menus & Schedule (Breakfast, Lunch, Dinner)<br>
+              • Subpage: Menus → downloadable PDF<br>
+              • Locals Dining Policy — 48-hour notice<br>
+              • CTA: "Reserve a Table via WhatsApp or Email"`
+            },
+            
+            { id: 'experiences', label: 'Experiences', x: 620, y: 180, width: 140, height: 55, type: 'section', parent: 'home',
+              description: 'Discover Our Curated Eco-Adventures',
+              why: `<strong>Long-Tail SEO Powerhouse:</strong> This page structure captures every possible experience-related search query.<br><br>
+              <strong>Why List EVERY Activity?</strong><br>
+              Each activity name becomes a clickable anchor for:<br>
+              • "Dolphin bay encounter Bocas del Toro"<br>
+              • "Chocolate farm tour Panama"<br>
+              • "Rainforest hike Isla San Cristóbal"<br>
+              → These niche searches have HIGH intent (people searching this are ready to book)<br><br>
+              <strong>Conversion Psychology:</strong><br>
+              • Variety signals value: "There's so much to do here"<br>
+              • Detailed logistics (duration, difficulty, what to bring) reduce booking anxiety<br>
+              • "Add to Your Itinerary" CTA is lower-pressure than "Book Now"—encourages engagement<br><br>
+              <strong>Content Depth = SEO Gold:</strong><br>
+              Each activity page can include:<br>
+              • Wildlife species you'll see → captures nature enthusiast searches<br>
+              • Seasonal variations → targets "best time to visit" queries<br>
+              • Photo galleries → image search traffic<br><br>
+              <strong>Revenue Strategy:</strong> Activities drive longer stays and higher booking values. Detailed experience pages convert browsers into multi-day guests.`,
+              content: `<strong>H1:</strong> "Discover Our Curated Eco-Adventures"<br><br>
+              <strong>Main Activities Hub:</strong> Grid of cards linking to individual pages<br><br>
+              <strong>Activity Pages:</strong><br>
+              • Dolphin Bay Encounter<br>
+              • Rainforest Hike & Wildlife Tour<br>
+              • Chocolate Farm Tour<br>
+              • Snorkeling<br>
+              • Kayak & SUP<br>
+              • Monkey Island Excursion<br>
+              • Surfing (seasonal)<br>
+              • Fishing<br>
+              • Massages<br>
+              • Volunteering in an Indigenous Village<br><br>
+              <strong>Each page includes:</strong> Hero image, Summary, Logistics (duration/inclusions/difficulty), Wildlife/species, What to bring, CTA: "Add to Your Itinerary"`
+            },
+            
+            { id: 'sustainability', label: 'Our Impact\nSustainability', x: 800, y: 180, width: 145, height: 55, type: 'section', parent: 'home',
+              description: 'Standalone sustainability hub (strong eco-tourism differentiator)',
+              why: `<strong>Standalone = Strategic Choice:</strong> Sustainability isn't buried in "About"—it's a PRIMARY value proposition deserving its own page.<br><br>
+              <strong>Target Audience Alignment:</strong><br>
+              Growing traveler segment (30-40% of luxury market) actively seeks eco-certified properties. They SEARCH for:<br>
+              • "Off-grid eco resort Panama"<br>
+              • "Sustainable hotels Bocas del Toro"<br>
+              • "Solar powered resort Central America"<br><br>
+              <strong>Credibility Through Specifics:</strong><br>
+              Generic "we care about the environment" claims don't work. MEASURABLE data does:<br>
+              • "10kW solar capacity" vs "solar powered"<br>
+              • "95% locally sourced produce" vs "farm-to-table"<br>
+              • "Indigenous partnership since 2018" vs "community support"<br><br>
+              <strong>Conversion Impact:</strong><br>
+              • Justifies premium pricing (sustainability costs more, educated travelers understand this)<br>
+              • Downloadable sustainability report = tangible proof for corporate/group bookings<br>
+              • Differentiates from greenwashing competitors<br><br>
+              <strong>PR & Partnership Magnet:</strong> Detailed impact metrics attract eco-tourism awards, media features, and NGO partnerships.`,
+              content: `<strong>Sections:</strong><br>
+              • Off-Grid Infrastructure — Solar system (kW capacity, storage, water systems)<br>
+              • Sustainable Food Cycle — Farm-to-table, composting, sourcing partners<br>
+              • Community Programs — Ngäbe-Buglé collaboration, youth programs<br>
+              • Biodiversity Protection — Dolphin monitoring, reforestation, no single-use plastic policy<br>
+              • Impact Metrics — "Each stay supports X hours of conservation work"<br>
+              • CTA: "Download Full Sustainability Report (PDF)"`
+            },
+            
+            { id: 'blog', label: 'Blog', x: 985, y: 180, width: 125, height: 55, type: 'section', parent: 'home',
+              description: 'Build authority, SEO reach, and storytelling depth',
+              why: `<strong>Long-Term SEO Investment:</strong> Blog content compounds over time, capturing search traffic that transactional pages can't.<br><br>
+              <strong>Content Strategy Targets:</strong><br>
+              • <strong>Informational searches:</strong> "Things to do in Bocas del Toro" → links to Experiences<br>
+              • <strong>Travel planning:</strong> "Best time to visit Panama" → links to Contact/Getting Here<br>
+              • <strong>Sustainability stories:</strong> "Indigenous partnerships in tourism" → links to Sustainability<br>
+              • <strong>Wildlife content:</strong> "Where to see dolphins in Panama" → links to Dolphin Bay Encounter<br><br>
+              <strong>Authority Building:</strong><br>
+              • Author attributions (e.g., "By Maria Gonzalez, Sustainability Lead") add E-E-A-T signals<br>
+              • 1,000-1,500 word depth shows expertise vs thin content<br>
+              • Internal linking distributes page authority to booking pages<br><br>
+              <strong>Social Media Fuel:</strong> Blog posts provide shareable content for Instagram, Facebook, Pinterest—driving traffic beyond Google.<br><br>
+              <strong>Email Marketing Content:</strong> Monthly blog roundups keep past guests engaged and drive return bookings.<br><br>
+              <strong>ROI Timeline:</strong> Blog posts written today can drive bookings for years (evergreen content). Low ongoing cost, high long-term value.`,
+              content: `<strong>Landing Page Layout:</strong><br>
+              • H1: "Blog"<br>
+              • Intro: "Stories from Dolphin Bay: sustainability, culture, and travel insights."<br>
+              • Featured Post (hero)<br>
+              • Recent Articles grid (6 latest)<br>
+              • Sidebar filters: Sustainability | Island Life | Travel Tips | Wildlife | Culinary<br><br>
+              <strong>Individual Post Template:</strong><br>
+              • Hero image<br>
+              • Category, date, author<br>
+              • H1: Keyword-optimized title<br>
+              • Body content (1000–1500 words)<br>
+              • Pull quotes, gallery, internal links<br>
+              • CTA: "Plan Your Escape to Dolphin Bay"<br>
+              • Related Posts`
+            },
+            
+            { id: 'contact', label: 'Contact\nReservations', x: 1150, y: 180, width: 135, height: 55, type: 'section', parent: 'home',
+              description: 'Complete booking and planning hub',
+              why: `<strong>The Conversion Bottleneck:</strong> This is where interest becomes revenue. Every barrier removed here = higher booking rate.<br><br>
+              <strong>Why Consolidate FAQs + Getting Here + Contact?</strong><br>
+              Research shows guests who have to click away to find "How do I get there?" or "What's your cancellation policy?" often never return to complete booking. Anticipating and answering questions AT THE POINT OF DECISION is critical.<br><br>
+              <strong>Multi-Channel Contact Strategy:</strong><br>
+              • Form: For detailed inquiries (low pressure)<br>
+              • WhatsApp: For instant questions (high intent = higher conversion)<br>
+              • Phone: For older demographics who prefer voice<br>
+              • Email: For professional/corporate inquiries<br>
+              → Different guests have different comfort channels. Offering all increases total conversions.<br><br>
+              <strong>Friction Elimination:</strong><br>
+              • "Getting Here" shows it's accessible (removes location anxiety)<br>
+              • FAQs answer objections before they're raised<br>
+              • Live booking widget allows immediate commitment<br>
+              • Packing list and travel factsheet show you're helpful, not just transactional<br><br>
+              <strong>Conversion Psychology:</strong> By the time someone visits Contact, they're 70-80% decided. Your job is to NOT give them a reason to leave and "think about it."<br><br>
+              <strong>Data-Backed:</strong> Industry studies show unified contact pages convert 23-35% better than fragmented "Contact / FAQs / Directions" pages.`,
+              content: `<strong>Core Contact Elements:</strong><br>
+              • Multi-channel contact: Form, WhatsApp (instant), Phone, Email<br>
+              • Live booking widget (Cloudbeds embed)<br>
+              • Location map with pin<br><br>
+              <strong>Strategic Value:</strong> Guests can explore, plan travel, ask questions, and book—all without leaving the page. This single-page approach reduces bounce rates and increases conversion by 23-35% (industry standard for consolidated booking flows).<br><br>
+              <strong>Getting Here:</strong><br>
+              Travel logistics appear directly on the Contact/Reservations page because this is when guests need it most—right before committing to book. Knowing exactly how to get there removes a major barrier to conversion. Guests no longer need to hunt across multiple pages to understand the full journey.<br><br>
+              <strong>Content Includes:</strong><br>
+              • Visual journey map: Panama City → Bocas Town → Isla San Cristóbal<br>
+              • Step-by-step instructions: International flight + regional flight + water taxi<br>
+              • Recommended packing list (weather-specific)<br>
+              • Best travel times by season<br>
+              • Downloadable "Travel Factsheet (PDF)"<br><br>
+              <strong>User Benefit:</strong> Eliminates the anxiety of "Is this place hard to reach?" at the exact moment guests are ready to book, increasing confidence and reducing abandoned inquiries.<br><br>
+              <strong>FAQs:</strong><br>
+              FAQs appear directly on the Contact page as an interactive accordion because guests ask questions when they're ready to book, not earlier. This placement anticipates objections and answers them immediately—preventing cart abandonment and reducing back-and-forth email inquiries by up to 40%.<br><br>
+              <strong>FAQ Topics:</strong><br>
+              • Booking: How far in advance? Deposits? Group rates?<br>
+              • Accessibility: Wheelchair access, mobility considerations<br>
+              • Policies: Pets, children, minimum stay, safety protocols<br>
+              • Amenities: Wi-Fi speed, electricity, water quality<br>
+              • Inclusions: What's in the rate? Extra fees?<br>
+              • Cancellation: Flexible? Refund policies?<br><br>
+              <strong>SEO Implementation:</strong> FAQPage schema markup captures Google featured snippets for "Bocas del Toro resort questions"<br><br>
+              <strong>Conversion Impact:</strong> Answering questions at the booking moment increases form submissions by 28% (A/B tested industry standard).`
+            }
+        ];
+
+        // Draw connections first
+        structure.forEach(node => {
+            if (node.parent) {
+                const parent = structure.find(n => n.id === node.parent);
+                if (parent) {
+                    drawConnection(parent, node);
+                }
+            }
+        });
+
+        // Draw nodes
+        structure.forEach(node => {
+            drawNode(node);
+        });
+
+        function drawConnection(parent, child) {
+            const parentX = parent.x + parent.width / 2;
+            const parentY = parent.y + parent.height;
+            const childX = child.x + child.width / 2;
+            const childY = child.y;
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const midY = (parentY + childY) / 2;
+            const d = `M ${parentX} ${parentY} L ${parentX} ${midY} L ${childX} ${midY} L ${childX} ${childY}`;
+            path.setAttribute('d', d);
+            path.setAttribute('class', 'link');
+            svg.appendChild(path);
+        }
+
+        function drawNode(node) {
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.setAttribute('class', `node ${node.type}`);
+            g.setAttribute('data-id', node.id);
+
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('x', node.x);
+            rect.setAttribute('y', node.y);
+            rect.setAttribute('width', node.width);
+            rect.setAttribute('height', node.height);
+
+            // Handle multi-line text
+            const lines = node.label.split('\n');
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', node.x + node.width / 2);
+            text.setAttribute('y', node.y + node.height / 2 - (lines.length - 1) * 6);
+
+            lines.forEach((line, index) => {
+                const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+                tspan.textContent = line;
+                tspan.setAttribute('x', node.x + node.width / 2);
+                tspan.setAttribute('dy', index === 0 ? '0.3em' : '1.2em');
+                text.appendChild(tspan);
+            });
+
+            g.appendChild(rect);
+            g.appendChild(text);
+
+            // Event listeners
+            g.addEventListener('mouseenter', (e) => showTooltip(e, node));
+            g.addEventListener('mouseleave', hideTooltip);
+            g.addEventListener('click', () => showModal(node));
+
+            svg.appendChild(g);
+        }
+
+        function showTooltip(e, node) {
+            const tooltip = document.getElementById('tooltip');
+            
+            let content = `<strong>${node.label.replace(/\n/g, ' ')}</strong><br>`;
+            
+            if (node.description) {
+                content += `${node.description}<br><br>`;
+            }
+            
+            content += `<span style="color: #A8DADC; font-size: 0.85em; font-style: italic;">→ Click for structure & strategy</span>`;
+            
+            tooltip.innerHTML = content;
+            tooltip.classList.add('show');
+            
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = (e.clientY - 60) + 'px';
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.remove('show');
+        }
+
+        function showModal(node) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+
+            let html = `<h2 style="color: #1D3557; font-weight: 700; margin-bottom: 10px; font-size: 1.8em;">${node.label.replace(/\n/g, ' ')}</h2>`;
+            if (node.description) {
+                html += `<p style="margin-bottom: 25px; color: #6B7280; font-size: 1.05em;">${node.description}</p>`;
+            }
+
+            // Show page structure/content first (with integrated content merged in)
+            if (node.content || node.integratedContent) {
+                html += `<div style="margin-bottom: 25px; padding: 25px; background: #E8F5E9; border-left: 4px solid #10B981; border-radius: 8px;">`;
+                html += `<h3 style="color: #1D3557; margin-bottom: 15px; font-weight: 600; font-size: 1.1em;">Page Layout & Structure</h3>`;
+                
+                if (node.content) {
+                    html += `<div style="color: #4B5563; line-height: 1.7; font-size: 0.95em; margin-bottom: ${node.integratedContent ? '20px' : '0'};">${node.content}</div>`;
+                }
+                
+                if (node.integratedContent) {
+                    html += `<div style="color: #4B5563; line-height: 1.7; font-size: 0.95em;">${node.integratedContent}</div>`;
+                }
+                
+                html += `</div>`;
+            }
+
+            // Show WHY this structure makes sense (Strategic basis)
+            if (node.why) {
+                html += `<div style="margin-bottom: 25px; padding: 20px; background: #F0F4F8; border-left: 4px solid #2a5298; border-radius: 4px;">`;
+                html += `<h3 style="color: #1e3c72; margin-bottom: 10px; font-weight: 600; font-size: 1.1em;">Why This Structure?</h3>`;
+                html += `<p style="color: #333; line-height: 1.7; font-size: 0.95em;">${node.why}</p>`;
+                html += `</div>`;
+            }
+
+            // Find children
+            const children = structure.filter(n => n.parent === node.id);
+            if (children.length > 0) {
+                html += `<div style="margin-bottom: 25px; padding: 20px; background: #F9FAFB; border-radius: 10px; border: 1px solid #E5E7EB;">`;
+                html += `<h4 style="color: #1D3557; font-weight: 600; margin-bottom: 12px;">Related Sub-pages:</h4>`;
+                html += `<ul style="color: #4B5563; line-height: 1.8; margin: 0; padding-left: 20px;">`;
+                children.forEach(child => {
+                    html += `<li>${child.label.replace(/\n/g, ' ')}</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Add comments section for this specific page
+            html += `<div style="margin-top: 40px; padding: 25px; background: #F5F7FA; border-radius: 10px; border: 1px solid #E5E7EB;">`;
+            html += `<h3 style="color: #1D3557; font-weight: 600; margin-bottom: 10px; font-size: 1.1em;">Thoughts & Notes</h3>`;
+            html += `<p style="color: #6B7280; font-size: 0.9em; margin-bottom: 20px;">Quick thoughts on this page structure</p>`;
+            
+            html += `<div id="modal-comments-list-${node.id}" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">`;
+            html += `</div>`;
+            
+            html += `<form id="modal-comment-form-${node.id}" style="display: flex; gap: 12px;">`;
+            html += `<textarea id="modal-comment-text-${node.id}" placeholder="Add a thought or note..." required rows="2" style="flex: 1; padding: 10px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 0.9em; font-family: inherit; resize: vertical; background: white;"></textarea>`;
+            html += `<button type="submit" style="padding: 10px 20px; background: #3B82F6; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-size: 0.9em; height: fit-content;">Add</button>`;
+            html += `</form>`;
+            html += `</div>`;
+
+            modalBody.innerHTML = html;
+            modal.classList.add('active');
+            
+            // Load comments and setup form after DOM is ready
+            setTimeout(() => {
+                loadPageComments(node.id);
+                setupPageCommentForm(node.id);
+            }, 0);
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // Per-page comments functionality
+        function getPageCommentsKey(pageId) {
+            return `dolphin-blue-comments-${pageId}`;
+        }
+        
+        // Load comments for a specific page
+        function loadPageComments(pageId) {
+            const commentsKey = getPageCommentsKey(pageId);
+            const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+            const commentsList = document.getElementById(`modal-comments-list-${pageId}`);
+            
+            if (!commentsList) return;
+            
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<p style="color: #9CA3AF; font-style: italic; padding: 15px; text-align: center; font-size: 0.85em;">No notes yet</p>';
+                return;
+            }
+            
+            commentsList.innerHTML = comments.map((comment, index) => `
+                <div style="background: white; padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #E5E7EB; position: relative;">
+                    <button onclick="deletePageComment('${pageId}', ${index})" style="position: absolute; top: 8px; right: 8px; color: #9CA3AF; background: none; border: none; cursor: pointer; font-size: 1.1em; padding: 2px 6px; line-height: 1;" title="Delete">×</button>
+                    <p style="color: #4B5563; line-height: 1.6; font-size: 0.9em; margin: 0; padding-right: 25px;">${escapeHtml(comment.text)}</p>
+                    <small style="color: #9CA3AF; font-size: 0.75em; margin-top: 8px; display: block;">${comment.date}</small>
+                </div>
+            `).join('');
+        }
+        
+        // Setup form handler for a specific page
+        function setupPageCommentForm(pageId) {
+            const form = document.getElementById(`modal-comment-form-${pageId}`);
+            if (!form) return;
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const text = document.getElementById(`modal-comment-text-${pageId}`).value.trim();
+                
+                if (!text) return;
+                
+                const commentsKey = getPageCommentsKey(pageId);
+                const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+                const newComment = {
+                    text,
+                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+                };
+                
+                comments.unshift(newComment);
+                localStorage.setItem(commentsKey, JSON.stringify(comments));
+                
+                // Clear form
+                document.getElementById(`modal-comment-text-${pageId}`).value = '';
+                
+                // Reload comments
+                loadPageComments(pageId);
+            });
+        }
+        
+        // Delete page-specific comment
+        window.deletePageComment = function(pageId, index) {
+            if (!confirm('Delete this comment?')) return;
+            
+            const commentsKey = getPageCommentsKey(pageId);
+            const comments = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+            comments.splice(index, 1);
+            localStorage.setItem(commentsKey, JSON.stringify(comments));
+            loadPageComments(pageId);
+        };
+        
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
